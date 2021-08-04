@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    <h2 class="w3-wide w3-center">LOGIN</h2>
+    <div class="w3-row">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="w3-col m4 w3-center"><p> </p></div> 
+            <div class="w3-col m4 w3-center">
+                {{ form.email(class="w3-input w3-border", placeholder="Email")}}
+                {{ form.password(class="w3-input w3-border", placeholder="Password")}}
+                {{ form.submit(class="w3-button w3-black w3-section w3-center")}}
+            </div>
+            <div class="w3-col m4 w3-center"><p> </p></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

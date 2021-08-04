@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="zoneA">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    <h2 class="w3-wide">PROFILE PAGE</h2>
+    <h3 class="w3-wide">{{user.name}}</h3>
+</div>
+<div class="w3-black" id="zoneB">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Today's Consuming</h2>
+        <p class="w3-opacity w3-center"><i>View today consuming data!</i></p><br>
+
+        <ul class="w3-ul w3-border w3-white w3-text-black">
+            <li class="w3-padding">Calories <span class="w3-tag {{funcA(current_user.cal_consume, current_user.cal_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.cal_consume) }} / {{ "{:.2f}".format(current_user.cal_needed) }} kcal.</span></li>
+            <li class="w3-padding">Protein <span class="w3-tag {{funcA(current_user.protein_consume, current_user.protein_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.protein_consume) }} / {{ "{:.2f}".format(current_user.protein_needed) }} g.</span></li>
+            <li class="w3-padding">Fat <span class="w3-tag {{funcA(current_user.fat_consume, current_user.fat_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.fat_consume) }} / {{ "{:.2f}".format(current_user.fat_needed) }} g.</span></li>
+            <li class="w3-padding">Carbohydrate <span class="w3-tag {{funcA(current_user.carb_consume, current_user.carb_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.carb_consume) }} / {{ "{:.2f}".format(current_user.carb_needed) }} g.</span></li>
+            <li class="w3-padding">Sugar <span class="w3-tag {{funcA(current_user.sugar_consume, current_user.sugar_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.sugar_consume) }} / {{ "{:.2f}".format(current_user.sugar_needed) }} g.</span></li>
+            <li class="w3-padding">Sodium <span class="w3-tag {{funcA(current_user.sodium_consume, current_user.sodium_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(current_user.sodium_consume) }} / {{ "{:.2f}".format(current_user.sodium_needed) }} g.</span></li>
+        </ul>
+
+    </div>
+</div>
+<div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="zoneC">
+    <h2 class="w3-wide w3-center">Overall Health</h2>
+    <p class="w3-opacity w3-center"><i>View your overall health!</i></p><br>
+
+    <ul class="w3-ul w3-border w3-white w3-text-black">
+        <li class="w3-padding">Overall <span class="w3-tag w3-black w3-right w3-margin-right">{{ "{:.2f}".format(hs[6]) }}</span></li>
+        <li class="w3-padding">Calories Consuming <span class="w3-tag {{funcB(hs[0],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[0]) }}</span></li>
+        <li class="w3-padding">Protein Consuming <span class="w3-tag {{funcB(hs[1],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[1]) }}</span></li>
+        <li class="w3-padding">Fat Consuming <span class="w3-tag {{funcB(hs[2],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[2]) }}</span></li>
+        <li class="w3-padding">Carbohydrate Connsuming <span class="w3-tag {{funcB(hs[3],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[3]) }}</span></li>
+        <li class="w3-padding">Sugar Consuming<span class="w3-tag {{funcB(hs[4],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[4]) }}</span></li>
+        <li class="w3-padding">Sodium Consuming<span class="w3-tag {{funcB(hs[5],-15,15)}} w3-right w3-margin-right">{{ "{:.2f}".format(hs[5]) }}</span></li>
+    </ul>
+
+</div>
+{% endblock %}

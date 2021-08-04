@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    <h2 class="w3-wide w3-center">SIGN UP</h2>
+    <div class="w3-row">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="w3-col m3 w3-center"><p> </p></div> 
+            <div class="w3-col m6 w3-center">
+                {{ form.name(class="w3-input w3-border", placeholder="Name")}}
+                {{ form.email(class="w3-input w3-border", placeholder="Email")}}
+                {{ form.password(class="w3-input w3-border", placeholder="Password")}}
+                {{ form.confirm_password(class="w3-input w3-border", placeholder="Confirm Password")}}
+                {{ form.height(class="w3-input w3-border", placeholder="Height (m.)")}}
+                {{ form.weight(class="w3-input w3-border", placeholder="Weight (Kg.)")}}
+                {{ form.age(class="w3-input w3-border", placeholder="Age (years old)")}}
+                <br>Gender : Male<input type="radio" value="male" name="genders" required>
+                 Female <input type="radio" value="female" name="genders" required><br>
+                <br>
+                <h5 class="w3-wide w3-center">Check your Restriction</h5>
+                Halal <input type="checkbox" value="halal" name="rest_list">
+                | Dialy Product <input type="checkbox" value="daily_product" name="rest_list">
+                | REST_A <input type="checkbox" value="restA" name="rest_list">
+                | REST_B <input type="checkbox" value="restB" name="rest_list">
+                <br>
+                {{ form.submit(class="w3-button w3-black w3-section w3-center")}}
+            </div>
+            <div class="w3-col m3 w3-center"><p> </p></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

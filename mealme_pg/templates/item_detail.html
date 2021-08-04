@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="zoneA">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    <img src="{{url_for('static', filename='item_images/' + item.img_file)}}" alt={{item.name}} style="width:400px;height:300px;" class="w3-hover-opacity">
+    <h2 class="w3-wide">{{item.name}}</h2>
+</div>
+<div class="w3-black" id="zoneB">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Food's Nutrient</h2>
+        <p class="w3-opacity w3-center"><i>View food nutrient!</i></p><br>
+
+        <ul class="w3-ul w3-border w3-white w3-text-black">
+            <li class="w3-padding">Calories <span class="w3-tag {{funcA(current_user.cal_consume + item.calories, current_user.cal_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.calories) }} kcal.</span></li>
+            <li class="w3-padding">Protein <span class="w3-tag {{funcA(current_user.protein_consume + item.protein, current_user.protein_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.protein) }} g.</span></li>
+            <li class="w3-padding">Fat <span class="w3-tag {{funcA(current_user.fat_consume + item.fat, current_user.fat_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.fat) }} g.</span></li>
+            <li class="w3-padding">Carbohydrate <span class="w3-tag {{funcA(current_user.carb_consume + item.carb, current_user.carb_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.carb) }} g.</span></li>
+            <li class="w3-padding">Sugar <span class="w3-tag {{funcA(current_user.sugar_consume + item.sugar, current_user.sugar_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.sugar) }} g.</span></li>
+            <li class="w3-padding">Sodium <span class="w3-tag {{funcA(current_user.sodium_consume + item.sodium, current_user.sodium_needed)}} w3-right w3-margin-right">{{ "{:.2f}".format(item.sodium) }} g.</span></li>
+        </ul>
+
+    </div>
+</div>
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="zoneC">
+    <a href="{{url_for('consume_event', item_id=item.id)}}" 
+                            class="w3-button w3-black w3-margin-bottom" 
+                            onclick="return confirm('Do you want to consume {{item.name}}?')">Consume</a>
+    <button onclick="goBack()" class="w3-button w3-black w3-margin-bottom">Back</button>
+</div>
+{% endblock %}
